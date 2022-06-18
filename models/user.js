@@ -19,28 +19,21 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         lowercase: true,
+        minlength: 7,
         validate(value) {
-            if (value.length < 7) {
-            throw new Error("email should be more than 7 characters!");
-        }},
-        validate(value){
-            if(!"@".includes(value)) throw "you must use @"
-        },
-        validate(value){
-            if(!value.split("@")[1].includes(".")) throw "Invalid email"   
-        },
+            if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
+              throw "email is error";
+          },
     },
         password: {
             type: String,
             required: true,
             trim: true,
             validate(value) {
-                if (value.length < 7) {
-                throw new Error("Password should be more than 7 characters!");
-
-        }
-    }
-    },
+                if (!value.match(/^(?=.*[0-9])(?=.*[!@#$%^&*]){2}/))
+                  throw "invalid password";
+              },
+            },
         age: {
             type: Number,
             default: 0,

@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("../models/user");
 const taskRouter = require("../models/task");
-
 const router = new express.Router();
+
 //נתיב למציאת כל המשימות
 router.get("/api/tasks", async (req, res) => {
     const allTasks = await taskRouter.find({});
